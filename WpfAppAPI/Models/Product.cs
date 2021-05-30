@@ -1,16 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using WpfAppAPI.Models;
 
 namespace WebApplication.Entities
 {
-    public class Product
+    public class Product : BaseModel
     {
+        private string name;
+        private string description;
+        private byte[] image;
+
         public int Id { get; set; }
-        public string Name { get; set; }
-        public byte[] Image{ get; set; }
-        public String Description { get; set; }
+
+        public string Name
+        {
+            get => name;
+            set
+            {
+                name = value; 
+                OnPropertyChanged();
+            }
+        }
+
+        public string Description
+        {
+            get => description;
+            set
+            {
+                description = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public byte[] Image
+        {
+            get => image;
+            set
+            {
+                image = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }
