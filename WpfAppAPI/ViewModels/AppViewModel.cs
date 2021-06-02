@@ -20,6 +20,8 @@ namespace WpfAppAPI.ViewModels
         private string txtEditName;
         private string txtEditDescription;
         private byte[] imgEditImage;
+        private ObservableCollection<string> themes;
+        private string selectedTheme;
         public ICommand GetProducts { get; }
         public ICommand DeleteProduct { get; }
         public ICommand AddProduct { get; }
@@ -35,6 +37,8 @@ namespace WpfAppAPI.ViewModels
             AddProduct = new DelegateCommand(OnAddProduct);
             EditProduct = new DelegateCommand(OnEditProduct, OnEditProductCanExecute);
             AddImage = new DelegateCommand(OnAddImage);
+            themes = new ObservableCollection<string>() {"light", "dark"};
+            SelectedTheme = "light";
         }
 
         private void OnAddImage(object obj)
@@ -89,6 +93,18 @@ namespace WpfAppAPI.ViewModels
             Products.Remove(SelectedProduct);
         }
 
+        private void OnThemeChange()
+        {
+            string style = "Themes/" + selectedTheme;
+            // определяем путь к файлу ресурсов
+            var uri = new Uri(style + ".xaml", UriKind.Relative);
+            // загружаем словарь ресурсов
+            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+            // очищаем коллекцию ресурсов приложения
+            Application.Current.Resources.Clear();
+            // добавляем загруженный словарь ресурсов
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+        }
         private async void OnGetProducts(object obj)
         {
             try
@@ -136,6 +152,22 @@ namespace WpfAppAPI.ViewModels
         {
             get => imgEditImage;
             set => Set(ref imgEditImage, value);
+        }
+
+        public ObservableCollection<string> Themes
+        {
+            get => themes;
+            set => themes = value;
+        }
+
+        public string SelectedTheme
+        {
+            get => selectedTheme;
+            set
+            {
+                selectedTheme = value;
+                OnThemeChange();
+            }
         }
     }
 }

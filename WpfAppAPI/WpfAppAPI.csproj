@@ -7,11 +7,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Page Remove="Themes\dark.xaml" />
+    <Page Remove="Themes\light.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Themes\dark.xaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Themes\light.xaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

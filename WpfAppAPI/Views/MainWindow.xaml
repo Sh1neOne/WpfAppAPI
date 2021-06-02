@@ -6,62 +6,90 @@
         xmlns:local="clr-namespace:WpfAppAPI"
         xmlns:viewmodels ="clr-namespace:WpfAppAPI.ViewModels"
         mc:Ignorable="d"
+        Style="{DynamicResource WindowStyle}"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
         <viewmodels:AppViewModel></viewmodels:AppViewModel>
     </Window.DataContext>
+    <TabControl>
+        <TabItem>
+            <TabItem.Header>Редактор</TabItem.Header>
+            <TabItem.Content>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition>
+                        </ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <DockPanel Grid.Column="0"
+                               Grid.Row="0"
+                               LastChildFill="True"
+                               VerticalAlignment="Stretch">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition>
-            </ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0"
-                   Grid.Row="0"
-                   LastChildFill="False"
-                   VerticalAlignment="Stretch">
-            <ListView ItemsSource="{Binding Products}"
-                      SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
-                      DockPanel.Dock="Top">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Изображение">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding Image}"
-                                       Width="100"></Image>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Наименование" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
-                        <GridViewColumn Header="Описание" DisplayMemberBinding="{Binding Description}"></GridViewColumn>
+                        <Button DockPanel.Dock="Bottom" 
+                                Height="30"
+                                Command="{Binding DeleteProduct}"
+                                Style="{DynamicResource ButtonStyle}">Удалить выделенный продукт</Button>
+                        <Button DockPanel.Dock="Bottom"
+                                Height="30"
+                                Command="{Binding GetProducts}"
+                                Style="{DynamicResource ButtonStyle}">Получить продукты
+                        </Button>
+                        <ListView ItemsSource="{Binding Products}"
+                                  SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                                  Style="{DynamicResource ListViewStyle}" >
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Изображение">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding Image}"
+                                                       Width="100">
+                                                </Image>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Наименование" DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                                    <GridViewColumn Header="Описание" DisplayMemberBinding="{Binding Description}"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DockPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                        <Label HorizontalAlignment="Stretch" Style="{DynamicResource LabelStyle}">Блок редактирования/добавления продукта</Label>
+                        <TextBlock Style="{DynamicResource TextBlockStyle}">Наименование</TextBlock>
+                        <TextBox Style="{DynamicResource TextBoxStyle}" x:Name="txtEditName" Text="{Binding TxtEditName, Mode=TwoWay}"></TextBox>
+                        <TextBlock Style="{DynamicResource TextBlockStyle}">Описание</TextBlock>
+                        <TextBox Style="{DynamicResource TextBoxStyle}"  Text="{Binding TxtEditDescription, Mode=TwoWay}"></TextBox>
+                        <TextBlock Style="{DynamicResource TextBlockStyle}">Изображение</TextBlock>
+                        <Image Source="{Binding ImgEditImage}" Height="100" OpacityMask="#FFD64141"/>
+                        <Button Command="{Binding AddImage}" 
+                                Style="{DynamicResource ButtonStyle}"
+                                HorizontalAlignment="Left">Выбрать изображение
+                        </Button>
+                        <Button Command="{Binding EditProduct}" 
+                                Style="{DynamicResource ButtonStyle}">Изменить выделенный продукт
+                        </Button>
+                        <Button Command="{Binding AddProduct}"
+                                Style="{DynamicResource ButtonStyle}">Добавить продукт
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem.Content>
+        </TabItem>
+        <TabItem>
+            <TabItem.Header>О приложении</TabItem.Header>
+            <TabItem.Content>
+                <StackPanel>
+                    <TextBlock Margin="4">Тема</TextBlock>
+                    <ComboBox ItemsSource="{Binding Themes}" 
+                              SelectedItem="{Binding SelectedTheme}">
+                    </ComboBox>
+                </StackPanel>
 
-                    </GridView>
-                </ListView.View>
-            </ListView>
-            <Button DockPanel.Dock="Bottom" 
-                    Height="30"
-                    Command="{Binding DeleteProduct}">Удалить выделенный продукт</Button>
-            <Button DockPanel.Dock="Bottom"
-                    Height="30"
-                Command="{Binding GetProducts}">Получить продукты</Button>
-        </DockPanel>
-        <StackPanel Grid.Column="1" 
-                    Grid.Row="1">
-            
-            
-            <Label Background="DeepSkyBlue" HorizontalAlignment="Stretch" >Блок редактирования/добавления продукта</Label>
-            <TextBlock>Наименование</TextBlock>
-            <TextBox x:Name="txtEditName" Text="{Binding TxtEditName, Mode=TwoWay}"></TextBox>
-            <TextBlock>Описание</TextBlock>
-            <TextBox Text="{Binding TxtEditDescription, Mode=TwoWay}"></TextBox>
-            <TextBlock>Изображение</TextBlock>
-            <Image Source="{Binding ImgEditImage}" Height="100"></Image>
-            <Button Command="{Binding AddImage}"
-                    HorizontalAlignment="Left">Выбрать изображение</Button>
-            <Button Command="{Binding EditProduct}">Изменить выделенный продукт</Button>
-            <Button Command="{Binding AddProduct}">Добавить продукт</Button>
-        </StackPanel>
-    </Grid>
+
+            </TabItem.Content>
+        </TabItem>
+
+    </TabControl>
 </Window>
