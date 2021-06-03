@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:WpfAppAPI">
     <Style x:Key="TextBlockStyle" TargetType="TextBlock">
         <Setter Property="Background" Value="White" />
-        <Setter Property="Foreground" Value="Gray" />
+        <Setter Property="Foreground" Value="Black" />
     </Style>
     <Style x:Key="WindowStyle" TargetType="Window">
         <Setter Property="Background" Value="White" />
@@ -24,4 +24,18 @@
     <Style x:Key="LabelStyle" TargetType="Label">
         <Setter Property="Background" Value="White"></Setter>
     </Style>
+    <Style x:Key="BorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="White"></Setter>
+    </Style>
+    <Style x:Key="StackPanelStyle" TargetType="StackPanel">
+        <Setter Property="Background" Value="White"></Setter>
+    </Style>
+    <Style x:Key="TabStyle" TargetType="TabControl">
+        <Setter Property="Background" Value="White"></Setter>
+    </Style>
+    <Style x:Key="SeparatorStyle" TargetType="Separator">
+        <Setter Property="BorderBrush" Value="Black"></Setter>
+        <Setter Property="BorderThickness" Value="5"></Setter>
+    </Style>
+
 </ResourceDictionary>

@@ -11,7 +11,7 @@
     <Window.DataContext>
         <viewmodels:AppViewModel></viewmodels:AppViewModel>
     </Window.DataContext>
-    <TabControl>
+    <TabControl Style="{DynamicResource TabStyle}">
         <TabItem>
             <TabItem.Header>Редактор</TabItem.Header>
             <TabItem.Content>
@@ -55,14 +55,17 @@
                             </ListView.View>
                         </ListView>
                     </DockPanel>
-                    <StackPanel Grid.Column="1" Grid.Row="1">
+                    <StackPanel Grid.Column="1" Grid.Row="1"
+                                Style="{DynamicResource StackPanelStyle}">
                         <Label HorizontalAlignment="Stretch" Style="{DynamicResource LabelStyle}">Блок редактирования/добавления продукта</Label>
                         <TextBlock Style="{DynamicResource TextBlockStyle}">Наименование</TextBlock>
                         <TextBox Style="{DynamicResource TextBoxStyle}" x:Name="txtEditName" Text="{Binding TxtEditName, Mode=TwoWay}"></TextBox>
                         <TextBlock Style="{DynamicResource TextBlockStyle}">Описание</TextBlock>
                         <TextBox Style="{DynamicResource TextBoxStyle}"  Text="{Binding TxtEditDescription, Mode=TwoWay}"></TextBox>
                         <TextBlock Style="{DynamicResource TextBlockStyle}">Изображение</TextBlock>
-                        <Image Source="{Binding ImgEditImage}" Height="100" OpacityMask="#FFD64141"/>
+                        <Border Style="{DynamicResource BorderStyle}">
+                            <Image Source="{Binding ImgEditImage}" Height="100"/>
+                        </Border>
                         <Button Command="{Binding AddImage}" 
                                 Style="{DynamicResource ButtonStyle}"
                                 HorizontalAlignment="Left">Выбрать изображение
@@ -81,13 +84,15 @@
             <TabItem.Header>О приложении</TabItem.Header>
             <TabItem.Content>
                 <StackPanel>
-                    <TextBlock Margin="4">Тема</TextBlock>
+                    <TextBlock FontSize="20" 
+                               Style="{DynamicResource TextBlockStyle}">Приложение позволяет редактировать продукты используя API</TextBlock>
+                    <Separator Style="{DynamicResource SeparatorStyle}"></Separator>
+                    <TextBlock Margin="4" FontSize="20" Style="{DynamicResource TextBlockStyle}">Тема оформления</TextBlock>
                     <ComboBox ItemsSource="{Binding Themes}" 
-                              SelectedItem="{Binding SelectedTheme}">
+                              SelectedItem="{Binding SelectedTheme}"
+                              >
                     </ComboBox>
                 </StackPanel>
-
-
             </TabItem.Content>
         </TabItem>
 
